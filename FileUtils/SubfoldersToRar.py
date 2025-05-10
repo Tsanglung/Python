@@ -14,5 +14,5 @@ def compress_subfolders_to_rar(parent_folder_path):
             print(f"資料夾已成功壓縮成 {output_rar_path}")
 
 # 設定父資料夾的路徑
-parent_folder_path = r"C:\Users\Administrator\Downloads\Telegram Desktop"
+parent_folder_path = r"C:\Users\Administrator\Downloads"
 compress_subfolders_to_rar(parent_folder_path)
