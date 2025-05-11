@@ -6,13 +6,51 @@ maptable = {
     "C": 100,
     "D": 500,
     "M": 1000,
-}  # 轉換對照表
-roman = [i for i in input()]
-r_roman = roman[::-1]  # 反轉串列
-ans = maptable[r_roman[0]]  # 讓 ans 先等於第一個數字
-for i in range(1, len(r_roman)):  # 從第二個數字開始依序取到最後一個數字
-    if maptable[r_roman[i]] < maptable[r_roman[i - 1]]:  # 如果後面數字比較小
-        ans = ans - maptable[r_roman[i]]  # 讓 ans 減去後面的數字
-    else:
-        ans = ans + maptable[r_roman[i]]  # 如果後面數字比較大，讓 ans 加上後面的數字
-print(ans)
+}  # 羅馬數字對應阿拉伯數字
+
+# 阿拉伯數字對應羅馬數字（有順序）
+map_table = [
+    (1000, "M"),
+    (900, "CM"),
+    (500, "D"),
+    (400, "CD"),
+    (100, "C"),
+    (90, "XC"),
+    (50, "L"),
+    (40, "XL"),
+    (10, "X"),
+    (9, "IX"),
+    (5, "V"),
+    (4, "IV"),
+    (1, "I"),
+]
+
+
+def convert_to_roman(s):
+    roman = [i for i in s]
+    r_roman = roman[::-1]  # 反轉串列
+    ans = maptable[r_roman[0]]
+    for i in range(1, len(r_roman)):
+        if maptable[r_roman[i]] < maptable[r_roman[i - 1]]:
+            ans = ans - maptable[r_roman[i]]
+        else:
+            ans = ans + maptable[r_roman[i]]
+    return ans
+
+
+def convert_to_a(n):
+    result = ""
+    for val, symbol in map_table:
+        while n >= val:
+            result += symbol
+            n -= val
+    return result
+
+
+inp = input("請輸入羅馬數字或阿拉伯數字：")
+
+if inp.isdigit():
+    num = int(inp)
+    print("轉換成羅馬數字：", convert_to_a(num))
+else:
+    print("轉換成阿拉伯數字：", convert_to_roman(inp))
